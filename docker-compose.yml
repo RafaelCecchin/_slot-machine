@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  
+  httpd:
+    image: httpd:alpine
+    container_name: httpd
+    volumes:
+      - ./website:/usr/local/apache2/htdocs
+    ports:
+      - "80:80"
+
+  python:
+    build:
+      context: .
+      dockerfile: dockerfile.python
+    volumes:
+      - ./python:/app
+    working_dir: /app
+    command: watchmedo auto-restart --debug-force-polling --directory=/app --pattern="*" --recursive -- fastapi run main.py
+    ports:
+      - "8000:8000"
+    stdin_open: true
+    tty: true
