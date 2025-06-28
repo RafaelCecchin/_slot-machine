@@ -1,0 +1,74 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f0f0f0;
+}
+
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        width: 100%;
+        padding: 2rem 1rem;
+    }
+
+        .slot-machine {
+            position: relative;
+            transform: scale(2);
+        }
+
+            .machine-image {
+                height: 389px;
+                width: 512px;
+                min-height: 389px;
+                min-width: 512px;
+            }
+
+            .reels {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 100%;
+                gap: 2rem;
+                transform: translate(-.7rem, .5rem);
+            }
+
+                .reel {
+                    width: 4.5rem;
+                    height: 5rem;
+                    display: flex;
+                }
+
+                    .reel img {
+                        width: 100%;
+                        height: auto;
+                    }
+
+            .spin-button {
+                width: max-content;
+                position: absolute;
+                right: 6rem;
+                bottom: 2.5rem;
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+                overflow: hidden;
+            }
+
+                .button-image {
+                    width: 64px;
+                    height: 24px;
+                }
+
+                .spin-button:active .button-image {
+                    transform: translateY(.2rem);
+                }
