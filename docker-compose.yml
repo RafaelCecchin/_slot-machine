@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  
+
   httpd:
     image: httpd:alpine
     container_name: httpd
@@ -10,6 +10,12 @@ services:
     ports:
       - "80:80"
 
+  redis:
+    image: redis:alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+
   python:
     build:
       context: .
@@ -17,8 +23,11 @@ services:
     volumes:
       - ./python:/app
     working_dir: /app
-    command: watchmedo auto-restart --debug-force-polling --directory=/app --pattern="*" --recursive -- fastapi run main.py
+    command: watchmedo auto-restart --debug-force-polling --directory=/app --pattern="*" --recursive -- python main.py
     ports:
       - "8000:8000"
+      - "8765:8765"
     stdin_open: true
     tty: true
+    depends_on:
+      - redis
