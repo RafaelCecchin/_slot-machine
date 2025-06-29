@@ -3,7 +3,7 @@ import aioredis
 from TikTokLive import TikTokLiveClient
 from TikTokLive.events import ConnectEvent, CommentEvent
 
-client: TikTokLiveClient = TikTokLiveClient(unique_id="dichlorophenolindopheno")
+client: TikTokLiveClient = TikTokLiveClient(unique_id="leidianeterra")
 
 redis = None
 
@@ -13,9 +13,10 @@ async def on_connect(event: ConnectEvent):
 
 @client.on(CommentEvent)
 async def on_comment(event: CommentEvent) -> None:
-    comment = f"{event.user.nickname} -> {event.comment}"
-    print(comment)
-    await redis.rpush("comments", comment)
+    #comment = f"{event.user.nickname} -> {event.comment}"
+    nickname = f"{event.user.nickname}"
+    print(nickname)
+    await redis.rpush("comments", nickname)
 
 async def main():
     global redis

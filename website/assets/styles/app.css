@@ -23,9 +23,26 @@ body {
         gap: 1rem;
     }
 
+        .welcome {
+            font-size: 2rem;
+            text-align: center;
+            font-family: sans-serif;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .user {
+            width: 80%;
+            margin: auto;
+            background-color: white;
+            padding: 0.5rem;
+            font-size: 2rem;
+            font-family: fantasy;
+            text-align: center;
+        }
+
         .slot-machine {
             position: relative;
-            /*transform: scale(2);*/
         }
 
             .machine-image {

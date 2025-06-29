@@ -4,6 +4,7 @@ const reels = document.querySelectorAll('.reel');
 const reel1 = document.querySelector('#reel-1');
 const reel2 = document.querySelector('#reel-2');
 const reel3 = document.querySelector('#reel-3');
+const user = document.querySelector('#user');
 
 const slotImages = [
     'assets/images/slots/slot1.png',
@@ -60,6 +61,7 @@ function connectWebSocket() {
 
     websocket.onmessage = function (event) {
         console.log("Mensagem recebida do WebSocket:", event.data);
+        user.textContent = event.data;
         spinButton.click();
     };
 
