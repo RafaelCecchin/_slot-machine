@@ -8,4 +8,15 @@ COPY python/requirements.txt .
 
 RUN pip install -r requirements.txt
 
+ARG UID=1000
+ARG GID=1000
+
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+RUN groupadd -g ${GID} appuser \
+    && useradd -u ${UID} -g ${GID} -m appuser
+
+USER appuser
+
 CMD ["python", "app.py"]
