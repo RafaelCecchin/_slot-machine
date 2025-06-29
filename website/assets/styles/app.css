@@ -19,7 +19,7 @@ body {
     .container {
         display: flex;
         flex-direction: column;
-        width: max-content;
+        width: min-content;
         gap: 1rem;
     }
 
@@ -78,6 +78,13 @@ body {
                 .spin-button:active .button-image {
                     transform: translateY(.2rem);
                 }
+
+        .instructions {
+            font-size: 2rem;
+            text-align: center;
+            font-family: sans-serif;
+            font-weight: 500;
+        }
 
         .gifts {
             display: grid;
