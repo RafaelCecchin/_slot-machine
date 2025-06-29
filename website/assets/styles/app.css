@@ -6,20 +6,26 @@
 
 body {
     background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    padding: 2rem 1rem;
+    gap: 1rem;
 }
 
     .container {
         display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        width: 100%;
-        padding: 2rem 1rem;
+        flex-direction: column;
+        width: max-content;
+        gap: 1rem;
     }
 
         .slot-machine {
             position: relative;
-            transform: scale(2);
+            /*transform: scale(2);*/
         }
 
             .machine-image {
@@ -72,3 +78,32 @@ body {
                 .spin-button:active .button-image {
                     transform: translateY(.2rem);
                 }
+
+        .gifts {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            list-style: none;
+            gap: 1rem 1rem;
+        }
+
+            .gift {
+                text-align: center;
+            }
+
+                .gift img {
+                    width: 3rem;
+                    height: 3rem;
+                    display: inline-block;
+                    margin: 0 auto;
+                }
+
+                .gift span {
+                    font-size: 3rem;
+                    font-weight: bold;
+                    font-family: fantasy;
+                    color: #A01C1B;
+                }
+
+            li:last-of-type {
+                grid-column: 1/-1;
+            }
