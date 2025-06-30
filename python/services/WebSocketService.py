@@ -1,6 +1,7 @@
 import asyncio
 import websockets
 import aioredis
+import json
 
 connected_clients = set()
 
@@ -16,13 +17,12 @@ async def websocket_handler(websocket):
 async def broadcast_comments():
     redis = aioredis.from_url("redis://redis:6379", decode_responses=True)
     while True:
-        _, comment = await redis.blpop("comments")
-        print(f"Enviando: {comment}")
-
+        _, message = await redis.blpop("messages")
         to_remove = set()
+        
         for ws in connected_clients:
             try:
-                await ws.send(comment)
+                await ws.send(message)
             except (websockets.ConnectionClosed, websockets.ConnectionClosedError, websockets.ConnectionClosedOK):
                 print("Cliente desconectado, removendo da lista.")
                 to_remove.add(ws)

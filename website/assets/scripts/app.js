@@ -61,7 +61,8 @@ function connectWebSocket() {
 
     websocket.onmessage = function (event) {
         console.log("Mensagem recebida do WebSocket:", event.data);
-        user.textContent = event.data;
+        data = JSON.parse(event.data);
+        user.textContent = data.username;
         spinButton.click();
     };
 
