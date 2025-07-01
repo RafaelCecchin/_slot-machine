@@ -2,15 +2,24 @@ import asyncio
 import aioredis
 import json
 from TikTokLive import TikTokLiveClient
-from TikTokLive.events import ConnectEvent, CommentEvent
+from TikTokLive.events import ConnectEvent, CommentEvent, GiftEvent
 
-client: TikTokLiveClient = TikTokLiveClient(unique_id="flavianasushiwoman")
+client: TikTokLiveClient = TikTokLiveClient(unique_id="ultimosbr")
 
 redis = None
 
 @client.on(ConnectEvent)
 async def on_connect(event: ConnectEvent):
     print(f"Connected to @{event.unique_id} (Room ID: {client.room_id})")
+
+@client.on(GiftEvent)
+async def on_gift(event: GiftEvent) -> None:
+    message = json.dumps({
+        "type": "gift",
+        "username": event.user.nickname,
+        "gift": event.gift.name,
+    })
+    await redis.rpush("messages", message)
 
 @client.on(CommentEvent)
 async def on_comment(event: CommentEvent) -> None:

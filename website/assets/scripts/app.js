@@ -61,8 +61,7 @@ function connectWebSocket() {
 
     websocket.onmessage = function (event) {
         console.log("Mensagem recebida do WebSocket:", event.data);
-        data = JSON.parse(event.data);
-        user.textContent = data.username;
+        addToQueue(event.data);
         spinButton.click();
     };
 
@@ -88,6 +87,33 @@ function attemptReconnect() {
     } else {
         console.error("Número máximo de tentativas de reconexão atingido.");
     }
+}
+
+function getLocalStorage(type) {
+    return JSON.parse(localStorage.getItem(type));
+}
+
+function setLocalStorage(type, data) {
+    localStorage.setItem(type, JSON.stringify(data));
+}
+
+function addToQueue(message) {
+    data = JSON.parse(message);
+    type = data.type;
+
+    queue = getLocalStorage(type) || [];
+    queue.push(data);
+    setLocalStorage(type, queue);
+}
+
+function getFromQueue(type) {
+    queue = getLocalStorage(type) || [];
+
+    if (queue.length === 0) return null;
+
+    const item = queue.shift();
+    setLocalStorage(type, queue);
+    return item;
 }
 
 connectWebSocket();
