@@ -42,7 +42,9 @@ body {
         }
 
         .slot-machine {
-            position: relative;
+            position: relative;    
+            transform: scale(.8);
+            margin: -2rem 0;
         }
 
             .machine-image {
@@ -122,7 +124,7 @@ body {
                 }
 
                 .gift span {
-                    font-size: 3rem;
+                    font-size: 2.5rem;
                     font-weight: bold;
                     font-family: fantasy;
                     color: #A01C1B;
