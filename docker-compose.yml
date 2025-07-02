@@ -6,7 +6,7 @@ services:
     image: httpd:alpine
     container_name: httpd
     volumes:
-      - ./website:/usr/local/apache2/htdocs
+      - ./scripts:/usr/local/apache2/htdocs
     ports:
       - "80:80"
 
@@ -20,13 +20,16 @@ services:
     build:
       context: .
       dockerfile: dockerfile.python
+    container_name: python
     volumes:
       - ./python:/app
+      - ./mitmproxy-data:/home/appuser/.mitmproxy
     working_dir: /app
     command: watchmedo auto-restart --debug-force-polling --directory=/app --pattern="*" --recursive -- python main.py
     ports:
       - "8000:8000"
       - "8765:8765"
+      - "8080:8080"
     stdin_open: true
     tty: true
     depends_on:

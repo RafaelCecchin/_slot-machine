@@ -1,10 +1,10 @@
 import asyncio
-import aioredis
+from redis.asyncio import Redis
 import json
 from TikTokLive import TikTokLiveClient
 from TikTokLive.events import ConnectEvent, CommentEvent, GiftEvent
 
-client: TikTokLiveClient = TikTokLiveClient(unique_id="ultimosbr")
+client: TikTokLiveClient = TikTokLiveClient(unique_id="alyson7tkk")
 
 redis = None
 
@@ -32,7 +32,7 @@ async def on_comment(event: CommentEvent) -> None:
 
 async def main():
     global redis
-    redis = aioredis.from_url("redis://redis:6379", decode_responses=True)
+    redis = Redis.from_url("redis://redis:6379", decode_responses=True)
     await client.start()
     await asyncio.Event().wait()
 

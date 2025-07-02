@@ -2,5 +2,6 @@ fastapi[standard]
 watchdog
 TikTokLive
 websockets
-redis
+redis>=4.2
 aioredis
+mitmproxy
